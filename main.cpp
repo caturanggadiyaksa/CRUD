@@ -12,66 +12,79 @@ void gotoxy(int x, int y){
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),k);
 }
 
-int jumlah_data, ketemu = 0;
-string ganti, hapus, cari;
+int jumlah_data;
+bool ketemu = true;
+string ganti;
+string hapus;
+string cari;
 char lagi;
 
 struct buku
 {
 	string id_buku;
 	string kategori_buku;
-	string judu_buku;
+	string judul_buku;
 	string penerbit_buku;
 	int harga;
 };
 
-//objact
+//object
 buku idb[100];
 
-
-void lihatdatabuku()
+void databuku()
 {
-	int n=0;
+	gotoxy(10,4);cout<<"+===========================================+"<<endl;
+	gotoxy(10,5);cout<<"|ID Buku          :                         |"<<endl;
+	gotoxy(10,6);cout<<"+===========================================+"<<endl;
+	gotoxy(10,7);cout<<"|Kategori Buku    :                         |"<<endl;
+	gotoxy(10,8);cout<<"+===========================================+"<<endl;
+	gotoxy(10,9);cout<<"+===========================================+"<<endl;
+	gotoxy(10,10);cout<<"|Judul Buku      :                          |"<<endl;
+	gotoxy(10,11);cout<<"+===========================================+"<<endl;
+	gotoxy(10,12);cout<<"+===========================================+"<<endl;
+	gotoxy(10,13);cout<<"|Penerbit Buku  :                           |"<<endl;
+	gotoxy(10,14);cout<<"+===========================================+"<<endl;
+	gotoxy(10,15);cout<<"+===========================================+"<<endl;
+	gotoxy(10,16);cout<<"| Harga Buku     :                          |"<<endl;
+	gotoxy(10,17);cout<<"+===========================================+"<<endl;
 	
-	for (int i = 0; i<jumlah_data; i++)
-	{
-		n++;
-		cout << idb[i].id_buku << endl;
-		cout << idb[i].kategori_buku << endl;
-		cout << idb[i].judu_buku << endl;
-		cout << idb[i].penerbit_buku << endl;
-		cout << idb[i].harga << endl;
-	}
 }
 
-
+void header()
+{
+	gotoxy(2,2);cout << "| ID BUKU\t|\t Kategori Buku \t\t|\t judul Buku \t\t|\t Penerbit Buku \t\t|\t Harga Buku |";
+}
 
 void data_baru()
 {
-	
+	tambahlagi:
 	system("cls");
-	cout << "Berapa Data";
-	cin >> jumlah_data;
-	if (jumlah_data > 100)
+		gotoxy(10,2);cout<<"+============================================+"<<endl;
+		gotoxy(10,3);cout <<"|Berapa Data yang ingin ditambahkan :       |";
+		gotoxy(10,4);cout<<"+============================================+"<<endl;
+		gotoxy(47,3);cin >> jumlah_data;
+		
+	if (jumlah_data >= 100)
 	{
-		cout << "maaf jumlah maksimal";
+		gotoxy(10,2);cout<<"+==========================================================+"<<endl;
+		gotoxy(10,3);cout <<"|Maaf Jumlah Data yang bisa ditambahkan hanya 100         |";
+		gotoxy(10,4);cout<<"+==========================================================+"<<endl;
+		_getch();
+		goto tambahlagi;
 	}
 	for (int i = 0;i < jumlah_data; i++ )
 	{
-		system("cls");
-		cout << "Input data baru" ;
-		
-		cout << "id buku";
-		cin >> idb[i].id_buku;
-		cout << "Kategori Buku";
+		system("cls");//Bagian input data baru
+		gotoxy(10,2);cout<<"+===========================================+"<<endl;
+		gotoxy(10,3);cout<<"|            Input Data Baru                |"<<endl;
+		gotoxy(10,4);cout<<"+===========================================+"<<endl;
+		databuku();
+		gotoxy(31,5);cin>>idb[i].id_buku;
 		cin.ignore();
-		getline(cin, idb[i].kategori_buku);
-		cout << "Judul Buku";
-		getline(cin, idb[i].judu_buku);
-		cout << "Penerbit Buku";
-		getline(cin, idb[i].penerbit_buku);
-		cout << "Harga Buku";
-		cin >> idb[i].harga;
+		gotoxy(31,7);getline(cin, idb[i].kategori_buku);
+		gotoxy(31,10);getline(cin, idb[i].judul_buku);
+		gotoxy(31,13);getline(cin, idb[i].penerbit_buku);
+		gotoxy(31,16);cin>>idb[i].harga;
 	}
 }
 
@@ -82,18 +95,17 @@ void tambahdata()
 	jumlah_data++;
 	ke1 = jumlah_data - 1;
 	
-	cout << "Tambah data" << endl;
-	cout << "ID Buku";
-	cin >> idb[ke1].id_buku;
-	cout << "Kategori Buku";
+	//tambah data
+	gotoxy(10,2);cout<<"+===========================================+"<<endl;
+	gotoxy(10,3);cout<<"|                Tambah Data                |"<<endl;
+	gotoxy(10,4);cout<<"+===========================================+"<<endl;
+	databuku();
+	gotoxy(31,5);cout<<""; cin>>idb[ke1].id_buku;
 	cin.ignore();
-	getline(cin, idb[ke1].kategori_buku);
-	cout << "Judul Buku";
-	getline(cin, idb[ke1].judu_buku);
-	cout << "Penerbit Buku";
-	getline(cin, idb[ke1].penerbit_buku);
-	cout << "Harga Buku";
-	cin >> idb[ke1].harga;
+	gotoxy(31,7);getline(cin, idb[ke1].kategori_buku);	
+	gotoxy(31,10);getline(cin, idb[ke1].judul_buku);	
+	gotoxy(31,13);getline(cin, idb[ke1].penerbit_buku);	
+	gotoxy(31,16);cin>>idb[ke1].harga;	
 	
 }
 
@@ -101,29 +113,34 @@ void caridata()
 {
 	system("cls");
 	
-	cout << "masukan id buku ";
-	cin >> cari;
+	gotoxy(10,1);cout<<"+===========================================+"<<endl;
+	gotoxy(10,2);cout<<"|Masukan ID Buku :                          |"<<endl;
+	gotoxy(10,3);cout<<"+===========================================+"<<endl;
+	gotoxy(30,2);cout<<""; cin>>cari;
 	
 	for (int n = 0; n < jumlah_data; n++)
 	{
 		if (cari == idb[n].id_buku)
 		{
-			ketemu = 1;
+			ketemu = true;
 			
-			cout << "view data" << endl;
-			cout << idb[n].id_buku << endl;
-			cout << idb[n].kategori_buku << endl;
-			cout << idb[n].judu_buku << endl;
-			cout << idb[n].penerbit_buku << endl;
-			cout << idb[n].harga << endl;
-			cout << "data ke";
-			cout << n + 1;
+			gotoxy(10,5);cout<<"view data"<< endl;
+			databuku();;
+			gotoxy(31,5);cout << idb[n].id_buku << endl;
+			gotoxy(31,7);cout << idb[n].kategori_buku << endl;
+			gotoxy(31,10);cout << idb[n].judul_buku << endl;
+			gotoxy(31,13);cout << idb[n].penerbit_buku << endl;
+			gotoxy(31,16);cout << idb[n].harga << endl;
+			gotoxy(10,19);cout<<"data ke";
+			gotoxy(20,19);cout << n + 1;
+			_getch();
 			break;
 		}
 	}
-	if (ketemu == 0)
+	if (ketemu == false)
 	{
-		cout << "data yang anda cari tidak ada";
+		gotoxy(10,7);cout <<"Data yang anda cari tidak ada";
+		_getch();
 	}
 }
 
@@ -131,28 +148,44 @@ void editdata()
 {
 	system("cls");
 	
-	cout << "masukan id buku yang akan di edit";
-	cin >> ganti;
-	
+	gotoxy(10,1);cout<<"+================================================+"<<endl;
+	gotoxy(10,2);cout<<"|Masukan ID Buku yang akan di Edit :             |"<<endl;
+	gotoxy(10,3);cout<<"+================================================++"<<endl;
+	gotoxy(48,2);cout<<""; cin>>ganti;
+		
 	for (int g = 0; g < jumlah_data; g++)
 	{
 		if (idb[g].id_buku == ganti)
 		{
-			ketemu = 1;
-			cout << "edit data" << endl;
-			cout << idb[g].id_buku << endl;
-			cout << idb[g].kategori_buku << endl;
-			cout << idb[g].judu_buku << endl;
-			cout << idb[g].penerbit_buku << endl;
-			cout << idb[g].harga << endl;
-			cout << "\n yakin di edit [Y/T] :";
-			cin >> lagi;
+			system("cls");
+			ketemu = true;
+			gotoxy(10,1);cout<<"+===========================================+"<<endl;
+			gotoxy(10,2);cout<<"|                    Edit Data              |"<<endl;
+			gotoxy(10,3);cout<<"+===========================================+"<<endl;
+			databuku();
+			gotoxy(31,5);cout << idb[g].id_buku << endl;
+			gotoxy(31,7);cout << idb[g].kategori_buku << endl;
+			gotoxy(31,10);cout << idb[g].judul_buku << endl;
+			gotoxy(31,13);cout << idb[g].penerbit_buku << endl;
+			gotoxy(31,16);cout << idb[g].harga << endl;
+			gotoxy(10,20);cout<<"+==========================================+"<<endl;
+			gotoxy(10,22);cout<<"|Yakin akan di Edit [ Y / T ] :            |"<<endl;
+			gotoxy(10,23);cout<<"+==========================================+"<<endl;
+			gotoxy(41,22);cout<<""; cin>>lagi;
 			
 			if (lagi == 'y' || lagi == 'Y')
 			{
-				cout << "data pengganti" << endl;
-				cout << "id buku";
-				cin >> idb[g].id_buku;
+				system("cls");
+				gotoxy(10,1);cout<<"+===========================================+"<<endl;
+				gotoxy(10,2);  cout<<"|                Data Pengganti             |"<<endl;
+				gotoxy(10,3);cout<<"+===========================================+"<<endl;
+				databuku();
+				cin.ignore();
+				gotoxy(31,5);cin >> idb[g].id_buku;
+				gotoxy(31,7);getline(cin, idb[g].kategori_buku);	
+				gotoxy(31,10);getline(cin, idb[g].judul_buku);	
+				gotoxy(31,13);getline(cin, idb[g].penerbit_buku);	
+				gotoxy(31,16);cin>>idb[g].harga;
 			}
 			else 
 			{
@@ -160,34 +193,38 @@ void editdata()
 			}
 		}
 	}
-	if (ketemu == 0)
+	if (ketemu == false)
 	{
-		cout << "data tidak ada";
+		gotoxy(10,10);cout<<"+===========================================+"<<endl;
+		gotoxy(10,11);cout<<"|               Data Tidak Ada              |"<<endl;
+		gotoxy(10,12);cout<<"+===========================================+"<<endl;
 	}
 }
 
 void hapusdata()
 {
 	system("cls");
-	
-	cout << "Masukan ID Buku Yang Akan Dihapus";
-	cin >> hapus;
-	
+		gotoxy(10,1);cout<<"+===========================================+"<<endl;
+		gotoxy(10,2);cout<<"|Masukan ID Buku yang akan di Hapus :       |"<<endl;
+		gotoxy(10,3);cout<<"+===========================================+"<<endl;
+		gotoxy(47,2);cout<<""; cin>>hapus;
+		
 	for (int k = 0; k < jumlah_data; k++)
 	{
 		if(hapus == idb[k].id_buku)
 		{
 			ketemu = 1;
 			
-			cout << "HAPUS DATA BUKU" << endl;
+			gotoxy(10,4);cout << "HAPUS DATA BUKU" << endl;
 			
-			cout << idb[k].id_buku;
-			cout << idb[k].kategori_buku << endl;
-			cout << idb[k].judu_buku << endl;
-			cout << idb[k].penerbit_buku << endl;
-			cout << idb[k].harga << endl;
+			databuku();
+			gotoxy(31,5);cout << idb[k].id_buku << endl;
+			gotoxy(31,7);cout << idb[k].kategori_buku << endl;
+			gotoxy(31,10);cout << idb[k].judul_buku << endl;
+			gotoxy(31,13);cout << idb[k].penerbit_buku << endl;
+			gotoxy(31,16);cout << idb[k].harga << endl;
 			
-			cout << "Yakin dihapus [Y/T]";
+			gotoxy(10,20);cout << "Yakin dihapus [Y/T]";
 			cin >> lagi;
 			
 			if (lagi == 'y'|| lagi == 'Y')
@@ -196,7 +233,7 @@ void hapusdata()
 				{
 					idb[l].id_buku = idb[l + 1].id_buku;
 					idb[l].kategori_buku = idb[l + 1].kategori_buku;
-					idb[l].judu_buku = idb[l + 1].judu_buku;
+					idb[l].judul_buku = idb[l + 1].judul_buku;
 					idb[l].penerbit_buku = idb[l + 1].penerbit_buku;
 					idb[l].harga = idb[l + 1].harga;
 				}
@@ -206,6 +243,25 @@ void hapusdata()
 		}
 	}
 }
+
+void lihatdatabuku()
+{
+	int n=0;
+	system("cls");
+	header();
+	
+	for (int i = 0; i<jumlah_data; i++)
+	{
+		n++;
+		gotoxy(7,4+i);cout << idb[i].id_buku << endl;
+		gotoxy(25,4+i);cout << idb[i].kategori_buku << endl;
+		gotoxy(58,4+i);cout << idb[i].judul_buku << endl;
+		gotoxy(85,4+i);cout << idb[i].penerbit_buku << endl;
+		gotoxy(118,4+i);cout << idb[i].harga << endl;
+	}
+	_getch();
+}
+
 
 int main()
 {
@@ -217,32 +273,32 @@ int main()
 	int i = 0;
 			
 		system("cls");
-		cout << "|---------------------------------------|" << endl;
-		cout << "|                                       |" << endl;
-		cout << "|            PERPUSTAKAAN               |" << endl;
-		cout << "|                 IDB                   |" << endl;
-		cout << "|              INDONESIA                |" << endl;
-		cout << "|                                       |" << endl;
-		cout << "|---------------------------------------|" << endl;
-		cout << "|                                       |" << endl;
-		cout << "|     Masukan Username\t:               |" << endl;
-		cout << "|     Masukan Password\t:               |" << endl;
-		cout << "|                                       |" << endl;
-		cout << "|                                       |" << endl;
-		cout << "|                                       |" << endl;
-		cout << "|                                       |" << endl;
-		cout << "|                                       |" << endl;
-		cout << "|                                       |" << endl;
-		cout << "|                                       |" << endl;
-		cout << "|                                       |" << endl;
-		cout << "|                                       |" << endl;
-		cout << "|---------------------------------------|" << endl;
-		gotoxy(25,7);cin >> username;
-		gotoxy(25,8);ch_password = _getch(); //kita menginputkan ketikkan kita ke variabel password.
-		while(ch_password != 13 && i < 6) //password != 13   ? 13 merupakan kode karakter enter, dengan ini pengimputan akan terhenti ketika unser menekan enter. 
+		gotoxy(10,2);cout << "+---------------------------------------+" << endl;
+		gotoxy(10,3);cout << "|                                       |" << endl;
+		gotoxy(10,4);cout << "|            PERPUSTAKAAN               |" << endl;
+		gotoxy(10,5);cout << "|                 IDB                   |" << endl;
+		gotoxy(10,6);cout << "|              INDONESIA                |" << endl;
+		gotoxy(10,7);cout << "|                                       |" << endl;
+		gotoxy(10,8);cout << "|---------------------------------------|" << endl;
+		gotoxy(10,9);cout << "|                                       |" << endl;
+		gotoxy(10,10);cout << "| Masukan Username\t:                 |" << endl;
+		gotoxy(10,11);cout << "| Masukan Password\t:                 |" << endl;
+		gotoxy(10,12);cout << "|                                       |" << endl;
+		gotoxy(10,13);cout << "|                                       |" << endl;
+		gotoxy(10,14);cout << "|                                       |" << endl;
+		gotoxy(10,15);cout << "|                                       |" << endl;
+		gotoxy(10,16);cout << "|                                       |" << endl;
+		gotoxy(10,17);cout << "|                                       |" << endl;
+		gotoxy(10,18);cout << "|                                       |" << endl;
+		gotoxy(10,19);cout << "|                                       |" << endl;
+		gotoxy(10,20);cout << "|                                       |" << endl;
+		gotoxy(10,21);cout << "+---------------------------------------+" << endl;
+		gotoxy(34,10);cin >> username;
+		gotoxy(34,11);ch_password = _getch(); 
+		while(ch_password != 13 && i < 6) 
 		{
-			password.push_back(ch_password); //berfungsi untuk memindahkan karakter untuk diinputkan ke variabel ch. Hal ini disebabkan karena variabel pasword merupakan variabel char yang mana hanya bisa menginput satu huruf saja. Sementara ch adalah string sehingga nilai yang tadinya disimpan didalam password akan tersimpan ke ch dan akan terkirim hingga kita menekan enter.
-			cout << '*'; //ketika kita ketik selain enter, maka output yang muncul adalah bintang bukan password itu sendiri
+			password.push_back(ch_password); 
+			cout << "*"; 
 			ch_password = _getch();
 			i++;
 		}
@@ -254,43 +310,45 @@ int main()
 				int pilihan;
 				do 
 				{
-					cout << "\n\n\n ini admin\n\n\n";
-					cout << "[1] Data Buku Baru" << endl;
-					cout << "[2] Tambah Data Buku " << endl;
-					cout << "[3] Cari Data Buku " << endl;
-					cout << "[4] Edit Data Buku" << endl;
-					cout << "[5] Hapus Data Buku" << endl;
-					cout << "[6] List Data Buku" << endl;
-					cout << "[7] Exit" << endl;
-					cout << "masukan pilihan \t:";
-					cin >> pilihan;	
+				system("cls");
+					gotoxy(10,2);cout<<"+=============================+"<<endl;				
+					gotoxy(10,3);cout<< "|      SELAMAT DATANG         |"<<endl;
+					gotoxy(10,4);cout<<"+=============================+"<<endl;
+					gotoxy(10,5);cout<< "|[1] Data Buku Baru           |" << endl;
+					gotoxy(10,6);cout<< "|[2] Tambah Data Buku         |" << endl;
+					gotoxy(10,7);cout<< "|[3] Cari Data Buku           |" << endl;
+					gotoxy(10,8);cout<< "|[4] Edit Data Buku           |" << endl;
+					gotoxy(10,9);cout<< "|[5] Hapus Data Buku          |" << endl;
+					gotoxy(10,10);cout<< "|[6] List Data Buku           |" << endl;
+					gotoxy(10,11);cout<< "|[7] Exit                     |" << endl;
+					gotoxy(10,12);cout<<"+=============================+"<<endl;
+					gotoxy(10,13);cout<< "|Masukan Pilihan :            |";
+					gotoxy(10,14);cout<<"+=============================+"<<endl;
+					gotoxy(29,13);cin >> pilihan;
 					
-					if (pilihan == 1)
+					switch(pilihan)
 					{
-						data_baru();
+						case 1:
+							data_baru();
+							break;
+						case 2:
+							tambahdata();
+							break;
+						case 3:
+							caridata();
+							break;
+						case 4:
+							editdata();
+							break;
+						case 5:
+							hapusdata();
+							break;
+						case 6:
+							lihatdatabuku();
+							break;
+						default:
+							exit(0);
 					}
-					else if (pilihan == 2)
-					{
-						tambahdata();
-					}
-					else if (pilihan == 3)
-					{
-						caridata();
-					}
-					else if (pilihan == 4)
-					{
-						editdata();
-					}
-					else if (pilihan == 5)
-					{
-						hapusdata();
-					}
-					else if (pilihan == 6)
-					{
-						lihatdatabuku();	
-					}
-					else
-					exit(0);
 					
 				}
 				while (pilihan != 0);
@@ -301,17 +359,13 @@ int main()
 				if (password != "111114")
 				{
 					string loglagi;
-					gotoxy(4,14);cout << "Paswword Salah!!!!!!" << endl;
-					gotoxy(4,15);cout << "Silahkan Masukan Password Yg benar" << endl;
+					gotoxy(12,14);cout << "Paswword Salah!!!!!!" << endl;
+					gotoxy(12,15);cout << "Silahkan Masukan Password Yg benar" << endl;
 				
-					gotoxy(4,16);cout << "Log In Kembali Y/T\t\t:";
+					gotoxy(12,16);cout << "Log In Kembali Y/T\t\t:";
 					cin >> loglagi;
 				
-					if (loglagi == "Y")
-					{
-						goto login;
-					}
-					else if (loglagi == "y")
+					if (loglagi == "Y" || loglagi == "y")
 					{
 						goto login;
 					}
@@ -325,25 +379,20 @@ int main()
 		{
 			if (username != "admin")
 			{
-				gotoxy(4,10);cout << "Username Salah!!!!!!" << endl;
-				gotoxy(4,11);cout << "Silahkan Masukan Username Yg benar" << endl;
+				gotoxy(12,14);cout << "Username Salah!!!!!!" << endl;
+				gotoxy(12,15);cout << "Silahkan Masukan Username Yg benar" << endl;
 			
 				string lagi;
-				gotoxy(4,12);cout << "Log In Kembali Y/T\t:";
+				gotoxy(12,16);cout << "Log In Kembali Y/T\t:";
 				cin >> lagi;
 			
-				if (lagi == "Y")
-				{
-					goto login;
-				}
-				else if (lagi == "y")
+				if (lagi == "Y" || lagi == "y")
 				{
 					goto login;
 				}
 				else
-				{
 					exit(0);
-				}
+				
 			}
 		}
 	return 0;
