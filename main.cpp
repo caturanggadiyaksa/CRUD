@@ -13,7 +13,7 @@ void gotoxy(int x, int y){
 }
 
 int jumlah_data;
-bool ketemu = true;
+bool ketemu = false;
 string ganti;
 string hapus;
 string cari;
@@ -195,10 +195,10 @@ void editdata()
 	}
 	if (ketemu == false)
 	{
-		gotoxy(10,10);cout<<"+===========================================+"<<endl;
-		gotoxy(10,11);cout<<"|               Data Tidak Ada              |"<<endl;
-		gotoxy(10,12);cout<<"+===========================================+"<<endl;
+		gotoxy(10,7);cout <<"Data yang anda cari tidak ada";
+		_getch();
 	}
+	
 }
 
 void hapusdata()
@@ -241,6 +241,11 @@ void hapusdata()
 				break;
 			}
 		}
+	}
+	if (ketemu == false)
+	{
+		gotoxy(10,7);cout <<"Data yang anda cari tidak ada";
+		_getch();
 	}
 }
 
